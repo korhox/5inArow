@@ -1,7 +1,9 @@
-# Author
+# 🪜 This repository is under construction and is being developed. ETA for first release is 7. Jan. 2022.
+
+## Author
 Juuso Korhonen
 
-# Compiling and running
+## Compiling and running
 1. Open terminal in the project folder (`cd xxx`)
 2. Install Maven depedencies:
      ```mvn install -f```
