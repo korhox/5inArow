@@ -1,5 +1,7 @@
 ![Logo](assets/logo.svg)
-[![Download](https://img.shields.io/badge/-Download-green?style=for-the-badge)](/korhox/5inarow/releases/latest/download/5inarow.zip) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/korhox/tictactoe?color=blue&label=Version&style=for-the-badge)
+
+[![Download](https://img.shields.io/badge/-Download-green?style=for-the-badge)](/korhox/5inarow/releases/latest/download/5inarow.zip) 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/korhox/5inarow?color=blue&style=for-the-badge)
 
 Welcome to my 5inArow game. This game is made with java and runs in command line. Graphical interface may be implemented in the future.
 
