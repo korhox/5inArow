@@ -1,4 +1,4 @@
-package fi.korho;
+package fi.korho.tictactoe;
 
 import java.io.Console;
 import com.github.tomaslanger.chalk.Chalk;
@@ -13,9 +13,9 @@ public class Utils {
      * Asks selected question from the user, and throws an error if given answer is
      * not an integer.
      * 
-     * @param question The question to be asked
-     * @return User's answer
-     * @throws Exception Error message
+     * @param question      The question to be asked
+     * @return              User's answer
+     * @throws Exception    Error message
      */
     public static int askInt(String question) throws Exception {
         try {

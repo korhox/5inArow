@@ -1,4 +1,4 @@
-package fi.korho;
+package fi.korho.tictactoe;
 
 import com.github.tomaslanger.chalk.Chalk;
 
@@ -42,7 +42,7 @@ public class Main {
             }
         }
 
-        // Request the number of playe0  (1 or 2)
+        // Request the number of players  (1 or 2)
         int players = 0;
         while (players != 1 && players != 2) {
             try {
@@ -55,7 +55,21 @@ public class Main {
             }
         }
 
-        String mode = "easy";
+        
+        // Select the difficulty. 1 or 0
+        int mode = -1;
+        if(players == 1){
+            while (mode != 0 && mode != 1) {
+                try {
+                    mode = Utils.askInt("Select the difficulty. 1 (recommended) or 0");
+                    if (mode != 0 && mode != 1) {
+                        throw new Exception("Plese enter 0 or 1");
+                    }
+                } catch (Exception e) {
+                    System.out.println(Chalk.on(e.getMessage()).red());
+                }
+            }
+        }
 
         // Create game
         Game arena = new Game(arenaSize, winRows);
@@ -64,8 +78,8 @@ public class Main {
         Utils.clearScreen();
         arena.printArena();
 
+        //List all free tiles
         String tiles = "";
-
         for (int y = 0; y < arenaSize; y++) {
             for (int x = 0; x < arenaSize; x++) {
                 tiles += " " + y + "," + x;
@@ -73,12 +87,14 @@ public class Main {
         }
         tiles = tiles.replaceFirst(" ", "");
 
+        //Game loop
         int player = 1;
         boolean gameContinues = true;
         while (gameContinues) {
             int x = 0;
             int y = 0;
 
+            //Ask for the move of the first person. First colun and then row and make sure they are valid
             if(player == 1){
                 System.out.print(Chalk.on("x").red() + ": ");
                 while (x < 1 || x > arenaSize) {
@@ -102,6 +118,8 @@ public class Main {
                 }
             }
 
+            //Two players, ask for move of the second person. First colun and then row and
+            // make sure they are valid
             if(players == 2 && player == 2){
                 System.out.print(Chalk.on("o").cyan() + ": ");
                 while (x < 1 || x > arenaSize) {
@@ -126,16 +144,52 @@ public class Main {
                 }
 
             } 
+            //One player, use "AI" to decide next move of player 2
             if(players == 1 && player == 2){
-                //Easy mode means that the "AI" generates random number from free tiles
-                if(mode.equals("easy")){
-                    int index = (int) Math.random() * tiles.split(" ").length;
+                // Difficulty 0 means that the "AI" generates random number from free tiles
+                if(mode == 0){
+                    int index = (int) (Math.random() * tiles.split(" ").length);
                     String tile = tiles.split(" ")[index];
                     x = Integer.parseInt(tile.split(",")[0]) + 1;
                     y = Integer.parseInt(tile.split(",")[1]) + 1;
                 }
-                // Hard mode means that the 
-                
+                // Difficulty 1, AI Looks next possible moves and decides best of them. Win => Bloxk => Random
+                else if(mode == 1){
+                    String[] temp_tiles = tiles.split(" ");
+                    String scores = "";
+                    for (int i = 0; i < temp_tiles.length; i++) {
+                        int temp_x = Integer.parseInt(temp_tiles[i].split(",")[0]);
+                        int temp_y = Integer.parseInt(temp_tiles[i].split(",")[1]);
+                        if(arena.checkVictory(temp_x, temp_y, 2)){
+                            scores += "2";
+                            break;
+                        } else if(arena.checkVictory(temp_x, temp_y, 1)){
+                            scores += "1";
+                            break;
+                        }else {
+                            scores += "0";
+                        }
+                    }
+
+                    int index = scores.indexOf("2");
+                    if(index == -1){
+                        index = scores.indexOf("1");
+                        if(index == -1){
+                            //No good move, make random move.
+                            String tile = temp_tiles[(int) (Math.random() * temp_tiles.length)];
+                            x = Integer.parseInt(tile.split(",")[0]) + 1;
+                            y = Integer.parseInt(tile.split(",")[1]) + 1;
+                        } else{
+                            //Blocking move found
+                            x = Integer.parseInt(temp_tiles[index].split(",")[0]) + 1;
+                            y = Integer.parseInt(temp_tiles[index].split(",")[1]) + 1;
+                        }
+                    } else{
+                        //Winning move found
+                        x = Integer.parseInt(temp_tiles[index].split(",")[0]) + 1;
+                        y = Integer.parseInt(temp_tiles[index].split(",")[1]) + 1;
+                    }
+                }
             }
             
             //Delete current tile from the tiles string
@@ -145,15 +199,18 @@ public class Main {
             tiles = tiles.replace(delete_tile, "");
 
             try{
+                //Make the move and print it
                 arena.setTile(x - 1, y - 1, player);
                 Utils.clearScreen();
                 arena.printArena();
+
+                //Check if player wins or if there is a tie
                 if (arena.checkVictory(x - 1, y - 1, player)) {
                     if (player == 1) {
                         System.out.println(Chalk.on("Player").red() + " " + Chalk.on("x").red().bold() + " "
                                 + Chalk.on("won").red());
                     } else if (player == 2) {
-                        System.out.println(Chalk.on("Player").cyan() + " " + Chalk.on("o").red().bold() + " "
+                        System.out.println(Chalk.on("Player").cyan() + " " + Chalk.on("o").cyan().bold() + " "
                                 + Chalk.on("won").cyan());
                     }
                     gameContinues = false;
@@ -161,7 +218,7 @@ public class Main {
                     System.out.println(Chalk.on("It's a tie!!").bold().white() + "" + Chalk.on("(no need to fight :3)").gray());
                     gameContinues = false;
                 }
-
+                //Change turn
                 player = (player == 1) ? 2 : 1;
             }catch(Exception e){
                 System.out.println(Chalk.on(e.getMessage()).red());

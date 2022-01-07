@@ -1,16 +1,14 @@
-package fi.korho;
+package fi.korho.tictactoe;
 
 import com.github.tomaslanger.chalk.Chalk;
 
 /**
- * Arena class contains the basic tictactoe game logic. Class does not interact
- * with the user.
+ * Arena class contains the basic 5inArow game logic.
  */
 
 public class Game {
     private int winRow = 5;
-    private int arenaSize = 5;
-    private int[][] arena = new int[arenaSize][arenaSize];
+    private int[][] arena = new int[5][5];
 
     public Game(int size, int winRow) {
         this.winRow = winRow;
@@ -27,12 +25,27 @@ public class Game {
     }
 
     /**
-     * Prints the player tiles of arena to console
+     * Prints the tiles of the arena to console
      */
     public void printArena() {
-        for (int y = 0; y < this.arena.length; y++) {
-            for (int x = 0; x < this.arena[y].length; x++) {
+        if(this.arena.length >= 5){
+            System.out.print("   ");
+            for (int i = 0; i < this.arena.length; i++) {
+                System.out.print(Chalk.on(((i + 1) >= 10 ? ((i + 1) >= 20 ? 2 : 1) : " ") + " ").white());
+            }
+            System.out.println("");
 
+            System.out.print("   ");
+            for (int i = 0; i < this.arena.length; i++) {
+                System.out.print(Chalk.on(((i + 1) >= 10 ? ((i + 1) >= 20 ? i - 19 : i - 9) : i + 1) + " ").white());
+            }
+            System.out.println("");
+        }
+        
+        for (int y = 0; y < this.arena.length; y++) {
+            if(this.arena.length >= 5) System.out.print(Chalk.on(((y + 1 >= 10) ? "" : " ") + (y + 1 ) + " ").white());
+
+            for (int x = 0; x < this.arena[y].length; x++) {
                 if (this.arena[y][x] == 0) {
                     System.out.print(Chalk.on("+ ").gray());
                 } else if (this.arena[y][x] == 1) {
@@ -46,27 +59,13 @@ public class Game {
         }
         System.out.println();
     }
-
-    /**
-     * Prints the raw values of arena to console
-     */
-    public void printArenaRaw() {
-        for (int y = 0; y < this.arena.length; y++) {
-            for (int x = 0; x < this.arena[y].length; x++) {
-                System.out.print(this.arena[y][x] + " ");
-            }
-            System.err.println();
-        }
-        System.out.println();
-    }
-
     /**
      * Sets the winRow value
      *
      * @param int newWinRow
      */
     public void setWinRow(int newWinRow) throws Exception {
-        if (this.arenaSize < 5) {
+        if (this.arena.length < 5) {
             if (newWinRow < 3) {
                 throw new Exception("Win round must be at least 3 when arena size is less than 5.");
             }
@@ -88,7 +87,7 @@ public class Game {
     }
 
     /**
-     * Sets player's selection to player's tile
+     * Sets player's move to the arena
      * 
      * @param x
      * @param y
@@ -105,7 +104,7 @@ public class Game {
     }
 
     /**
-     * Checks direction for selected player
+     * Checks given direction for players tile 
      * 
      * @param player
      * @param x
@@ -113,7 +112,7 @@ public class Game {
      * @param direction_x
      * @param direction_y
      * 
-     * @return 0 if no win, 1 if won
+     * @return 0 if no win, 1 + checks next tile if won.
      */
     private int checkDirection(int player, int x, int y, int direction_x, int direction_y) {
         try {
@@ -127,7 +126,7 @@ public class Game {
     }
 
     /**
-     * Checks whether player won last move or not.
+     * Checks whether player won last move or not in given arena.
      * 
      * @param x
      * @param y
