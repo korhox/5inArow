@@ -12,11 +12,8 @@ public class Game {
     private int arenaSize = 5;
     private int[][] arena = new int[arenaSize][arenaSize];
 
-    public Game(int size, int winRow) throws Exception {
-        if (size < 3 || size > 20) {
-            throw new Exception("Arena size must be between 3 and 20");
-        }
-        this.setWinRow(winRow);
+    public Game(int size, int winRow) {
+        this.winRow = winRow;
         this.arena = new int[size][size];
     }
 
@@ -26,7 +23,7 @@ public class Game {
      * @return arena
      */
     public int[][] getArena() {
-        return arena;
+        return this.arena;
     }
 
     /**
@@ -36,11 +33,11 @@ public class Game {
         for (int y = 0; y < this.arena.length; y++) {
             for (int x = 0; x < this.arena[y].length; x++) {
 
-                if (arena[y][x] == 0) {
+                if (this.arena[y][x] == 0) {
                     System.out.print(Chalk.on("+ ").gray());
-                } else if (arena[y][x] == 1) {
+                } else if (this.arena[y][x] == 1) {
                     System.out.print(Chalk.on("x ").red());
-                } else if (arena[y][x] == 2) {
+                } else if (this.arena[y][x] == 2) {
                     System.out.print(Chalk.on("o ").cyan());
                 }
 
@@ -56,7 +53,7 @@ public class Game {
     public void printArenaRaw() {
         for (int y = 0; y < this.arena.length; y++) {
             for (int x = 0; x < this.arena[y].length; x++) {
-                System.out.print(arena[y][x] + " ");
+                System.out.print(this.arena[y][x] + " ");
             }
             System.err.println();
         }
@@ -100,15 +97,15 @@ public class Game {
      * @throws Exception
      */
     public void setTile(int x, int y, int player) throws Exception {
-        if (arena[y][x] == 0) {
-            arena[y][x] = player;
+        if (this.arena[y][x] == 0) {
+            this.arena[y][x] = player;
         } else {
             throw new Exception("That spot is taken!");
         }
     }
 
     /**
-     *  Checks direction for selected player
+     * Checks direction for selected player
      * 
      * @param player
      * @param x
@@ -120,8 +117,8 @@ public class Game {
      */
     private int checkDirection(int player, int x, int y, int direction_x, int direction_y) {
         try {
-            if(this.arena[y + direction_y][x + direction_x] == player){
-                return 1 + checkDirection(player, x+direction_x, y+direction_y, direction_x, direction_y);
+            if (this.arena[y + direction_y][x + direction_x] == player) {
+                return 1 + checkDirection(player, x + direction_x, y + direction_y, direction_x, direction_y);
             }
             return 0;
         } catch (IndexOutOfBoundsException e) {
@@ -139,12 +136,15 @@ public class Game {
      * @return if player won that round.
      */
     public boolean checkVictory(int x, int y, int player) {
-        if(checkDirection(player, x, y, -1, -1) + checkDirection(player, x, y, 1, 1) + 1 >= this.winRow) return(true);
-        if(checkDirection(player, x, y, 1, -1) + checkDirection(player, x, y, -1, 1) + 1 >= this.winRow) return(true);
-        if(checkDirection(player, x, y, 0, -1) + checkDirection(player, x, y, 0, 1) + 1 >= this.winRow) return(true);
-        if(checkDirection(player, x, y, -1, 0) + checkDirection(player, x, y, 1, 0) + 1 >= this.winRow) return(true);
+        if (checkDirection(player, x, y, -1, -1) + checkDirection(player, x, y, 1, 1) + 1 >= this.winRow)
+            return (true);
+        if (checkDirection(player, x, y, 1, -1) + checkDirection(player, x, y, -1, 1) + 1 >= this.winRow)
+            return (true);
+        if (checkDirection(player, x, y, 0, -1) + checkDirection(player, x, y, 0, 1) + 1 >= this.winRow)
+            return (true);
+        if (checkDirection(player, x, y, -1, 0) + checkDirection(player, x, y, 1, 0) + 1 >= this.winRow)
+            return (true);
 
         return false;
     }
 }
-
