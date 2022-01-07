@@ -9,21 +9,21 @@ This game was made as final project work of "Introduction to Programming 2021" c
 Juuso Korhonen
 
 ## Download
-You can download the game from here: [download](/korhox/5inarow/releases/latest/download/5inarow.jar)
+You can download the game from here: [download](/korhox/5inarow/releases/latest/download/5inArow-1.0-jar-with-dependencies.jar)
 
 ## Running
 To run the game, you'll need to have [Java](https://www.oracle.com/java/technologies/downloads/) installed.
 
-Once downloaded, simply open the file with Java. If you have unarchiver software installed (like WinRar), you may have to right-click the file and click "Open with..." > "Java".
+Open console/terminal in the directory - where you downloaded the file to and execute a following command:
+```java -jar ./5inArow-1.0-jar-with-dependencies.jar```
 
-## Compiling and running
+## Compiling the source code
+Compiling requires Maven and Java Development Kit
 1. Open terminal in the project folder (`cd xxx`)
-2. Install Maven depedencies:
-     ```mvn install -f```
-3. Compile the code with command:
-      ```mvn compile -f .```
+2. Compile the code with command:
+      ```mvn clean install assembly:single```
 3. Run the compiled code with:
-     ```java ./target/classes/fi/korho/Main.java```
+     ```java -jar ./target/5inArow-1.0-jar-with-dependencies.jar```
 
 ## Project Work Requirements
 Since this was a school project, it had a few requirements set by our course instructor. If you wonder some time, that why this was not used instead of this, it may be the reason. I also tried to use the coding practises we learned in the course.

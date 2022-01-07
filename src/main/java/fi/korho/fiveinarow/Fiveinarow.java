@@ -1,8 +1,8 @@
-package fi.korho.tictactoe;
+package fi.korho.fiveinarow;
 
 import com.github.tomaslanger.chalk.Chalk;
 
-public class Main {
+public class Fiveinarow {
     public static void main(String[] args) {
 
         Utils.clearScreen();

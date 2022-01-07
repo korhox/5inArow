@@ -1,4 +1,4 @@
-package fi.korho.tictactoe;
+package fi.korho.fiveinarow;
 
 import java.io.Console;
 import com.github.tomaslanger.chalk.Chalk;
