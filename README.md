@@ -1,6 +1,6 @@
 ![Logo](assets/logo.svg)
 
-[![Download](https://img.shields.io/badge/-Download-green?style=for-the-badge)](/korhox/5inarow/releases/latest/download/5inarow.zip) 
+[![Download](https://img.shields.io/badge/-Download-green?style=for-the-badge)](/korhox/5inarow/releases/latest/download/5inarow.jar) 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/korhox/5inarow?color=blue&style=for-the-badge)
 
 Welcome to my 5inArow game. This game is made with java and runs in command line. Graphical interface may be implemented in the future.
@@ -11,13 +11,13 @@ This game was made as final project work of "Introduction to Programming 2021" c
 Juuso Korhonen
 
 ## Download
-You can download the game from here: [download](/korhox/5inarow/releases/latest/download/5inArow-1.0-jar-with-dependencies.jar)
+You can download the game from here: [download](/korhox/5inarow/releases/latest/download/5inArow.jar)
 
 ## Running
 To run the game, you'll need to have [Java](https://www.oracle.com/java/technologies/downloads/) installed.
 
 Open console/terminal in the directory - where you downloaded the file to and execute a following command:
-```java -jar ./5inArow-1.0-jar-with-dependencies.jar```
+```java -jar ./5inArow.jar```
 
 ## Compiling the source code
 Compiling requires Maven and Java Development Kit
