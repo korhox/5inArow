@@ -3,6 +3,8 @@
 [![Download](https://img.shields.io/badge/-Download-green?style=for-the-badge)](https://github.com/korhox/5inArow/releases/latest/download/5inArow.jar) 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/korhox/5inarow?color=blue&style=for-the-badge)
 
+[![Docs](https://img.shields.io/badge/-DOCS-yellow)](https://korhox.github.io/5inArow/)
+
 Welcome to my 5inArow game. This game is made with java and runs in command line. Graphical interface may be implemented in the future.
 
 ![Screenshot](assets/screenshot.png)
@@ -32,6 +34,9 @@ mvn clean install assembly:single
 ```bash
 java -jar ./target/5inArow-1.0-jar-with-dependencies.jar
 ```
+
+## Javadocs
+Javadocs are available here: https://korhox.github.io/5inArow/
 
 ## Generating new javadoc for edited source
 If you need to regenerate javadocs for you, I have convenitely configured in `pom.xml`
