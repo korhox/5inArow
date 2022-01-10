@@ -5,6 +5,8 @@
 
 Welcome to my 5inArow game. This game is made with java and runs in command line. Graphical interface may be implemented in the future.
 
+![Screenshot](assets/screenshot.png)
+
 This game was made as final project work of "Introduction to Programming 2021" course by Jussi Pohjolainen ([@pohjus](https://github.com/pohjus)).
 
 ## Author
