@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"fi.korho.fiveinarow","l":"Fiveinarow"},{"p":"fi.korho.fiveinarow","l":"Game"},{"p":"fi.korho.fiveinarow","l":"Utils"}];updateSearchResults();

@@ -23,9 +23,17 @@ Open console/terminal in the directory - where you downloaded the file to and ex
 Compiling requires Maven and Java Development Kit
 1. Open terminal in the project folder (`cd xxx`)
 2. Compile the code with command:
-      ```mvn clean install assembly:single```
+```bash
+mvn clean install assembly:single
+```
 3. Run the compiled code with:
-     ```java -jar ./target/5inArow-1.0-jar-with-dependencies.jar```
+```bash
+java -jar ./target/5inArow-1.0-jar-with-dependencies.jar
+```
+
+## Generating new javadoc for edited source
+If you need to regenerate javadocs for you, I have convenitely configured in `pom.xml`
+that the output woll go automatically to `/docs` on every time, you run `mvn install`.
 
 ## Project Work Requirements
 Since this was a school project, it had a few requirements set by our course instructor. If you wonder some time, that why this was not used instead of this, it may be the reason. I also tried to use the coding practises we learned in the course.
